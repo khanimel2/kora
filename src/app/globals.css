@@ -1,0 +1,283 @@
+@import "tailwindcss";
+
+/* ─── KORA DESIGN SYSTEM ─── Premium Light Theme ─── */
+
+:root {
+  /* Core Palette */
+  --kora-lavender: #B8A9E8;
+  --kora-lavender-light: #F0EDFA;
+  --kora-lavender-dark: #8B79C7;
+  --kora-mint: #7DD4B0;
+  --kora-mint-light: #E5F6EE;
+  --kora-mint-dark: #5BB890;
+  --kora-blue: #7CC5E3;
+  
+  --kora-navy: #0A0A14;
+  --text-primary: #0A0A14;
+  --text-secondary: #5F5E7B;
+  --text-muted: #9594A8;
+
+  /* Surfaces */
+  --bg-base: #FCFCFF;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-card-hover: rgba(255, 255, 255, 0.98);
+  --bg-glass: rgba(255, 255, 255, 0.6);
+  --bg-glass-strong: rgba(255, 255, 255, 0.9);
+
+  /* Borders */
+  --border-glass: rgba(0, 0, 0, 0.04);
+  --border-strong: rgba(0, 0, 0, 0.08);
+
+  /* Shadows - Ultra Crisp */
+  --shadow-sm: 0 4px 12px rgba(10, 10, 20, 0.03);
+  --shadow-md: 0 12px 32px rgba(10, 10, 20, 0.06);
+  --shadow-lg: 0 24px 64px rgba(10, 10, 20, 0.08);
+  --shadow-glow: 0 0 80px rgba(184, 169, 232, 0.2);
+
+  /* Radius - Elegant and sharp */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 9999px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ─── GLASS CARD (PREMIUM) ─── */
+.glass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  box-shadow: var(--shadow-md);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.glass-card-strong {
+  background: #FFFFFF;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ─── BACKGROUND PATTERN ─── */
+.kora-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('/kora_bg.png');
+  background-size: 350px;
+  background-repeat: repeat;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── GLOWING ORBS ─── */
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+  animation: orbFloat 15s ease-in-out infinite;
+}
+
+.glow-orb-lavender { background: var(--kora-lavender); }
+.glow-orb-mint { background: var(--kora-mint); }
+.glow-orb-blue { background: var(--kora-blue); }
+
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(2vw, -2vh) scale(1.05); }
+}
+
+/* ─── ANIMATIONS ─── */
+.animate-float { animation: float 6s ease-in-out infinite; }
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+.animate-spin-slow { animation: spin 4s linear infinite; }
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* ─── BUTTON IMAGES ─── */
+.kora-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.kora-btn:hover {
+  transform: scale(1.03) translateY(-2px);
+}
+
+.kora-btn:active {
+  transform: scale(0.97);
+}
+
+.kora-btn img {
+  width: auto;
+  filter: drop-shadow(0 8px 24px rgba(139, 121, 199, 0.3));
+  transition: all 0.3s ease;
+}
+
+.kora-btn:hover img {
+  filter: drop-shadow(0 12px 32px rgba(139, 121, 199, 0.5)) brightness(1.05);
+}
+
+/* ─── INPUT FIELDS (MINIMAL ROW STYLE) ─── */
+.kora-input-row {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border-bottom: 2px solid var(--border-glass);
+  padding: 8px 0;
+  transition: all 0.3s ease;
+}
+
+.kora-input-row:focus-within {
+  border-bottom-color: var(--kora-lavender-dark);
+}
+
+.kora-input-clean {
+  flex: 1;
+  background: transparent;
+  border: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-primary);
+  outline: none;
+  padding: 0;
+}
+
+.kora-input-clean::placeholder {
+  color: var(--border-strong);
+}
+
+/* Standard Inputs */
+.kora-input {
+  width: 100%;
+  padding: 16px 20px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.01);
+}
+
+.kora-input:focus {
+  border-color: var(--kora-lavender-dark);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.01), 0 0 0 3px var(--kora-lavender-light);
+}
+
+/* ─── TOKEN SELECT (UNBOXED MINIMAL) ─── */
+.token-select-minimal {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 12px 6px 6px;
+  background: rgba(0,0,0,0.03);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text-primary);
+}
+
+.token-select-minimal:hover {
+  background: rgba(0,0,0,0.06);
+  transform: scale(1.02);
+}
+
+/* ─── TAB NAVIGATION ─── */
+.kora-nav-tabs {
+  display: flex;
+  gap: 32px;
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.kora-nav-tab {
+  padding: 16px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  background: none;
+  border: none;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.kora-nav-tab:hover {
+  color: var(--text-primary);
+}
+
+.kora-nav-tab-active {
+  color: var(--text-primary);
+}
+
+.kora-nav-tab-active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--kora-lavender-dark);
+}
+
+/* ─── UTILS ─── */
+.kora-spinner {
+  border: 2px solid var(--border-strong);
+  border-top-color: var(--text-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.wallet-adapter-button { display: none !important; }
