@@ -156,7 +156,7 @@ export default function Hero({ onGetStarted }: HeroProps) {
           />
         </motion.button>
         <motion.a
-          href="https://t.me/korameme"
+          href="https://x.com/Kora_Solana"
           target="_blank"
           rel="noopener noreferrer"
           className="kora-btn kora-btn-xl"
@@ -164,8 +164,8 @@ export default function Hero({ onGetStarted }: HeroProps) {
           whileTap={{ scale: 0.95 }}
         >
           <Image
-            src="/kora_button_telegram.png"
-            alt="Join Telegram"
+            src="/x_button_matching.png"
+            alt="Follow on X"
             width={320}
             height={80}
             style={{ width: "auto", height: 80 }}

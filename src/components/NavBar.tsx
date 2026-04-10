@@ -119,9 +119,9 @@ export default function NavBar({ activeTab, onTabChange }: NavBarProps) {
 
         {/* Right side — Telegram + Wallet */}
         <div style={{ display: "flex", alignItems: "center", gap: 16, flexShrink: 0 }}>
-          {/* Telegram Button */}
+          {/* X Button */}
           <motion.a
-            href="https://t.me/korameme"
+            href="https://x.com/Kora_Solana"
             target="_blank"
             rel="noopener noreferrer"
             className="kora-btn kora-btn-nav"
@@ -129,8 +129,8 @@ export default function NavBar({ activeTab, onTabChange }: NavBarProps) {
             whileTap={{ scale: 0.94 }}
           >
             <img
-              src="/kora_button_telegram.png"
-              alt="Join Telegram"
+              src="/x_button_matching.png"
+              alt="Follow on X"
               style={{ width: "180px", height: "auto" }}
             />
           </motion.a>

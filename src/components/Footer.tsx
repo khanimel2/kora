@@ -85,7 +85,7 @@ export default function Footer() {
           {[
             { label: "Docs", href: "https://launch.solana.com/docs/kora" },
             { label: "GitHub", href: "https://github.com/solana-foundation/kora" },
-            { label: "Telegram", href: "https://t.me/korameme" },
+            { label: "X", href: "https://x.com/Kora_Solana" },
             { label: "Solscan", href: "https://solscan.io" },
             { label: "API", href: "https://launch.solana.com/docs/kora/json-rpc-api" },
           ].map((link) => (
@@ -119,8 +119,8 @@ export default function Footer() {
           <motion.a href="https://launch.solana.com/docs/kora" target="_blank" className="kora-btn" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <img src="/kora_button_primary.png" alt="Docs" style={{ width: 140, height: "auto" }} />
           </motion.a>
-          <motion.a href="https://t.me/korameme" target="_blank" className="kora-btn" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <img src="/kora_button_telegram.png" alt="Telegram" style={{ width: 140, height: "auto" }} />
+          <motion.a href="https://x.com/Kora_Solana" target="_blank" className="kora-btn" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <img src="/x_button_matching.png" alt="X" style={{ width: 140, height: "auto" }} />
           </motion.a>
           <motion.a href="https://github.com/solana-foundation/kora" target="_blank" className="kora-btn" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <img src="/kora_button_connect_wallet.png" alt="GitHub" style={{ width: 140, height: "auto" }} />
