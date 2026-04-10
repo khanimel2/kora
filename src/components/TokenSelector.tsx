@@ -30,32 +30,30 @@ export default function TokenSelector({
   return (
     <AnimatePresence>
       {isOpen && (
-        <>
-          {/* Backdrop — solid dark overlay, no blur */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            style={{
-              position: "fixed",
-              inset: 0,
-              background: "rgba(10, 10, 20, 0.6)",
-              zIndex: 500,
-            }}
-          />
-
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(10, 10, 20, 0.6)",
+            zIndex: 500,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 20,
+          }}
+        >
           {/* Modal — fully opaque, solid white */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 30 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            onClick={(e: React.MouseEvent) => e.stopPropagation()}
             style={{
-              position: "fixed",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
               width: "min(460px, 92vw)",
               maxHeight: "75vh",
               zIndex: 501,
@@ -279,7 +277,7 @@ export default function TokenSelector({
               )}
             </div>
           </motion.div>
-        </>
+        </motion.div>
       )}
     </AnimatePresence>
   );
