@@ -6,6 +6,8 @@ import {
   WalletProvider,
 } from "@solana/wallet-adapter-react";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
+import { PhantomWalletAdapter } from "@solana/wallet-adapter-phantom";
+import { SolflareWalletAdapter } from "@solana/wallet-adapter-solflare";
 
 import "@solana/wallet-adapter-react-ui/styles.css";
 
@@ -18,9 +20,10 @@ export function WalletProviderWrapper({
 }: {
   children: React.ReactNode;
 }) {
-  // Modern wallets (Phantom, Solflare, Backpack, etc.) auto-register
-  // via the wallet-standard protocol. No manual adapters needed.
-  const wallets = useMemo(() => [], []);
+  const wallets = useMemo(
+    () => [new PhantomWalletAdapter(), new SolflareWalletAdapter()],
+    []
+  );
 
   return (
     <ConnectionProvider endpoint={RPC_ENDPOINT}>
