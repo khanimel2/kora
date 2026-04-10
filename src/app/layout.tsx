@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { WalletProviderWrapper } from "@/components/WalletProvider";
+import ClientProviders from "@/components/ClientProviders";
 
 export const metadata: Metadata = {
   title: "Kora — Gasless Meme Token Swapper & Tipper | Solana",
@@ -47,7 +47,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <WalletProviderWrapper>{children}</WalletProviderWrapper>
+        <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
   );
