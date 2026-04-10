@@ -14,7 +14,7 @@ import {
   Gift,
 } from "lucide-react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { useWalletModal } from "@solana/wallet-adapter-react-ui";
+import { usePhantomConnect } from "@/hooks/usePhantomConnect";
 import { Connection, PublicKey, Transaction } from "@solana/web3.js";
 import {
   createTransferInstruction,
@@ -36,7 +36,7 @@ interface AirdropEntry {
 
 export default function TipPanel() {
   const { publicKey, signTransaction: walletSign, connected } = useWallet();
-  const { setVisible } = useWalletModal();
+  const { connectPhantom, connecting: walletConnecting } = usePhantomConnect();
 
   const [mode, setMode] = useState<TabMode>("tip");
   const [token, setToken] = useState<TokenInfo>(POPULAR_TOKENS[2]); // BONK
@@ -467,15 +467,20 @@ export default function TipPanel() {
               <div style={{ marginTop: 20 }}>
                 {!connected ? (
                   <motion.button
-                    onClick={() => setVisible(true)}
+                    type="button"
+                    onClick={() => connectPhantom()}
+                    disabled={walletConnecting}
+                    aria-busy={walletConnecting}
                     className="kora-btn kora-btn-lg"
                     style={{
                       width: "100%",
                       display: "flex",
                       justifyContent: "center",
+                      opacity: walletConnecting ? 0.75 : 1,
+                      cursor: walletConnecting ? "wait" : "pointer",
                     }}
-                    whileHover={{ scale: 1.03, y: -2 }}
-                    whileTap={{ scale: 0.97 }}
+                    whileHover={walletConnecting ? undefined : { scale: 1.03, y: -2 }}
+                    whileTap={walletConnecting ? undefined : { scale: 0.97 }}
                   >
                     <img
                       src="/kora_button_connect_wallet.png"
@@ -661,15 +666,20 @@ export default function TipPanel() {
               <div style={{ marginTop: 20 }}>
                 {!connected ? (
                   <motion.button
-                    onClick={() => setVisible(true)}
+                    type="button"
+                    onClick={() => connectPhantom()}
+                    disabled={walletConnecting}
+                    aria-busy={walletConnecting}
                     className="kora-btn kora-btn-lg"
                     style={{
                       width: "100%",
                       display: "flex",
                       justifyContent: "center",
+                      opacity: walletConnecting ? 0.75 : 1,
+                      cursor: walletConnecting ? "wait" : "pointer",
                     }}
-                    whileHover={{ scale: 1.03, y: -2 }}
-                    whileTap={{ scale: 0.97 }}
+                    whileHover={walletConnecting ? undefined : { scale: 1.03, y: -2 }}
+                    whileTap={walletConnecting ? undefined : { scale: 0.97 }}
                   >
                     <img
                       src="/kora_button_connect_wallet.png"

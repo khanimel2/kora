@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePhantomConnect } from "@/hooks/usePhantomConnect";
 
 export type TabKey = "swap" | "tip" | "transfer" | "status";
 
@@ -22,7 +22,7 @@ const TABS: { key: TabKey; label: string }[] = [
 
 export default function NavBar({ activeTab, onTabChange }: NavBarProps) {
   const { publicKey, disconnect, connected } = useWallet();
-  const { setVisible } = useWalletModal();
+  const { connectPhantom, connecting } = usePhantomConnect();
   const [showMenu, setShowMenu] = useState(false);
 
   const shortAddr = publicKey
@@ -220,10 +220,17 @@ export default function NavBar({ activeTab, onTabChange }: NavBarProps) {
             </div>
           ) : (
             <motion.button
-              onClick={() => setVisible(true)}
+              type="button"
+              onClick={() => connectPhantom()}
+              disabled={connecting}
+              aria-busy={connecting}
               className="kora-btn kora-btn-nav"
-              whileHover={{ scale: 1.08, y: -3 }}
-              whileTap={{ scale: 0.94 }}
+              style={{
+                opacity: connecting ? 0.75 : 1,
+                cursor: connecting ? "wait" : "pointer",
+              }}
+              whileHover={connecting ? undefined : { scale: 1.08, y: -3 }}
+              whileTap={connecting ? undefined : { scale: 0.94 }}
             >
               <img
                 src="/kora_button_connect_wallet.png"

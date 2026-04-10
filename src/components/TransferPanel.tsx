@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, Zap, ChevronDown, ArrowRight } from "lucide-react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { useWalletModal } from "@solana/wallet-adapter-react-ui";
+import { usePhantomConnect } from "@/hooks/usePhantomConnect";
 import { Connection, VersionedTransaction } from "@solana/web3.js";
 import { POPULAR_TOKENS, TokenInfo, FEE_TOKEN_OPTIONS } from "@/lib/tokens";
 import { transferTransaction, signAndSendTransaction } from "@/lib/kora";
@@ -14,7 +14,7 @@ import Mascot from "./Mascot";
 
 export default function TransferPanel() {
   const { publicKey, signTransaction: walletSign, connected } = useWallet();
-  const { setVisible } = useWalletModal();
+  const { connectPhantom, connecting: walletConnecting } = usePhantomConnect();
 
   const [token, setToken] = useState<TokenInfo>(POPULAR_TOKENS[1]); // USDC
   const [feeToken, setFeeToken] = useState<TokenInfo>(FEE_TOKEN_OPTIONS[0]); // USDC
@@ -303,15 +303,20 @@ export default function TransferPanel() {
         <div>
           {!connected ? (
             <motion.button
-              onClick={() => setVisible(true)}
+              type="button"
+              onClick={() => connectPhantom()}
+              disabled={walletConnecting}
+              aria-busy={walletConnecting}
               className="kora-btn"
               style={{
                 width: "100%",
                 display: "flex",
                 justifyContent: "center",
+                opacity: walletConnecting ? 0.75 : 1,
+                cursor: walletConnecting ? "wait" : "pointer",
               }}
-              whileHover={{ scale: 1.03, y: -2 }}
-              whileTap={{ scale: 0.97 }}
+              whileHover={walletConnecting ? undefined : { scale: 1.03, y: -2 }}
+              whileTap={walletConnecting ? undefined : { scale: 0.97 }}
             >
               <img
                 src="/kora_button_connect_wallet.png"

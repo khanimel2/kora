@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowDown, Settings, ChevronDown, Zap, Shield, Clock } from "lucide-react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { useWalletModal } from "@solana/wallet-adapter-react-ui";
+import { usePhantomConnect } from "@/hooks/usePhantomConnect";
 import { Connection, VersionedTransaction } from "@solana/web3.js";
 import { POPULAR_TOKENS, TokenInfo } from "@/lib/tokens";
 import { getQuote, getSwapTransaction, formatTokenAmount, parseTokenAmount, JupiterQuote } from "@/lib/jupiter";
@@ -14,7 +14,7 @@ import Mascot from "./Mascot";
 
 export default function SwapPanel() {
   const { publicKey, signTransaction: walletSign, connected } = useWallet();
-  const { setVisible } = useWalletModal();
+  const { connectPhantom, connecting: walletConnecting } = usePhantomConnect();
 
   // Token state
   const [fromToken, setFromToken] = useState<TokenInfo>(POPULAR_TOKENS[2]); // BONK
@@ -509,11 +509,20 @@ export default function SwapPanel() {
         <div style={{ marginTop: 18 }}>
           {!connected ? (
             <motion.button
-              onClick={() => setVisible(true)}
+              type="button"
+              onClick={() => connectPhantom()}
+              disabled={walletConnecting}
+              aria-busy={walletConnecting}
               className="kora-btn kora-btn-md"
-              style={{ width: "100%", display: "flex", justifyContent: "center" }}
-              whileHover={{ scale: 1.03, y: -2 }}
-              whileTap={{ scale: 0.97 }}
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+                opacity: walletConnecting ? 0.75 : 1,
+                cursor: walletConnecting ? "wait" : "pointer",
+              }}
+              whileHover={walletConnecting ? undefined : { scale: 1.03, y: -2 }}
+              whileTap={walletConnecting ? undefined : { scale: 0.97 }}
             >
               <img
                 src="/kora_button_connect_wallet.png"
